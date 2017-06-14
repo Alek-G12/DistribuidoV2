@@ -37,10 +37,13 @@ public class Client implements Runnable {
                 packet = new DatagramPacket(buf, buf.length, svAddress, 4445);
                 socket.send(packet);
                 System.out.println("Packet Sent");
+                Thread.sleep(1000);
             }
         } catch (SocketException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
 
