@@ -43,19 +43,15 @@ public class Client implements Runnable {
             byte[] buf;
             while (true) {
                 buf = new byte[256];
-                packet = new DatagramPacket(buf, buf.length);
-                //System.out.println("Client waiting");
+                packet = new DatagramPacket(buf, buf.length);;
                 socket.receive(packet);
-                //System.out.println("Client received packet");
                 InetAddress svAddress = packet.getAddress();
-                //System.out.println("Server Address: " + svAddress);
 
                 String reply = System.getProperty("user.name");
                 reply = reply.concat("\t@\t" + InetAddress.getLocalHost().getHostName());
                 buf = reply.getBytes();
                 packet = new DatagramPacket(buf, buf.length, svAddress, 4445);
                 socket.send(packet);
-                //System.out.println("Packet Sent");
                 Thread.sleep(1000);
             }
         } catch (SocketException ex) {
