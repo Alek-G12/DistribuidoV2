@@ -46,7 +46,7 @@ public class Server implements Runnable {
     private void handlePacket(DatagramPacket packet) {
         new Thread(() -> {
             String req = new String(packet.getData());
-            System.out.println("Received: " + req + " from: " + packet.getAddress());
+            System.out.println("Received: " + req + "\tfrom: " + packet.getAddress());
         }).start();
     }
 

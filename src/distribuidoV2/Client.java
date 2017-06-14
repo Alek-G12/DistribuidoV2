@@ -51,7 +51,7 @@ public class Client implements Runnable {
                 //System.out.println("Server Address: " + svAddress);
 
                 String reply = System.getProperty("user.name");
-                reply = reply.concat(" @ " + InetAddress.getLocalHost().getHostName());
+                reply = reply.concat("\t@\t" + InetAddress.getLocalHost().getHostName());
                 buf = reply.getBytes();
                 packet = new DatagramPacket(buf, buf.length, svAddress, 4445);
                 socket.send(packet);
