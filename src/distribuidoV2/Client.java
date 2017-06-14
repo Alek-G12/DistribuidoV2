@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +17,23 @@ public class Client implements Runnable {
 
     DatagramSocket socket;
     private int PORT = 4446;
+    private String clientAddress;
+
+    public Client() {
+        try {
+            this.clientAddress = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getPORT() {
+        return PORT;
+    }
+
+    public String getClientAddress() {
+        return clientAddress;
+    }
 
     @Override
     public void run() {
@@ -26,17 +44,17 @@ public class Client implements Runnable {
             while (true) {
                 buf = new byte[256];
                 packet = new DatagramPacket(buf, buf.length);
-                System.out.println("Client waiting");
+                //System.out.println("Client waiting");
                 socket.receive(packet);
-                System.out.println("Client received packet");
+                //System.out.println("Client received packet");
                 InetAddress svAddress = packet.getAddress();
-                System.out.println("Server Address: " + svAddress);
+                //System.out.println("Server Address: " + svAddress);
 
                 String reply = System.getProperty("user.name");
                 buf = reply.getBytes();
                 packet = new DatagramPacket(buf, buf.length, svAddress, 4445);
                 socket.send(packet);
-                System.out.println("Packet Sent");
+                //System.out.println("Packet Sent");
                 Thread.sleep(1000);
             }
         } catch (SocketException ex) {

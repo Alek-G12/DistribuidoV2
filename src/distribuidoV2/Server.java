@@ -31,8 +31,8 @@ public class Server implements Runnable {
                 byte[] buf = new byte[256];
                 DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4446);
                 socket.send(packet);
-                System.out.println("Broadcast message sent");
-                System.out.println("Server Listening...");
+                //System.out.println("Broadcast message sent");
+               // System.out.println("Server Listening...");
                 socket.receive(packet);
                 handlePacket(packet);
             }
@@ -46,7 +46,7 @@ public class Server implements Runnable {
     private void handlePacket(DatagramPacket packet) {
         new Thread(() -> {
             String req = new String(packet.getData());
-            System.out.println("Received: " + req + "from: " + packet.getAddress());
+            System.out.println("Received: " + req + " from: " + packet.getAddress());
         }).start();
     }
 

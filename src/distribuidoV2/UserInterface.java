@@ -180,5 +180,6 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void startClient() {
         clientThread.start();
+        status_label.setText("Client Running on: " + client.getClientAddress());
     }
 }
