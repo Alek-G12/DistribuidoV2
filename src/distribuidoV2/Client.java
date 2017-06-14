@@ -51,7 +51,12 @@ public class Client implements Runnable {
                 reply = reply.concat("\t@\t" + InetAddress.getLocalHost().getHostName());
                 buf = reply.getBytes();
                 packet = new DatagramPacket(buf, buf.length, svAddress, 4445);
-                socket.send(packet);
+                try {
+                    socket.send(packet);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 Thread.sleep(1000);
             }
         } catch (SocketException ex) {
