@@ -28,7 +28,6 @@ public class Client implements Runnable {
                 packet = new DatagramPacket(buf, buf.length);
                 System.out.println("Client waiting");
                 socket.receive(packet);
-                Thread.sleep(2000);
                 System.out.println("Client received packet");
                 InetAddress svAddress = packet.getAddress();
                 System.out.println("Server Address: " + svAddress);
@@ -42,8 +41,6 @@ public class Client implements Runnable {
         } catch (SocketException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
 
